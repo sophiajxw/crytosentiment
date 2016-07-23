@@ -22,7 +22,7 @@ class AddBar extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit}>
+      <form onSubmit={this.onFormSubmit} className="bar">
         <input id="searchbar" onChange={this.onInputChange} value={this.state.title} placeholder={"Title"} />
         <span>
           <button id="button" type="submit">Add</button>

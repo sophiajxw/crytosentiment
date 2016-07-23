@@ -4,6 +4,8 @@ import Note from './note';
 import AddBar from './add_bar';
 
 // example class based component (smart component)
+let z = 0;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +26,7 @@ class App extends Component {
       text: '',
       x: 100,
       y: 100,
-      zIndex: 2,
+      zIndex: z++,
     };
     console.log(newNote);
     this.setState({

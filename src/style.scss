@@ -2,8 +2,18 @@ body {
   font-family: "Roboto", sans-serif;
   color: rgb(10%, 10%, 10%);
   background: darken(white, 10%);
-  margin: 50px;
-  background-color: lightblue;
+  background-image: url("http://images.designtrends.com/wp-content/uploads/2015/12/08123956/Paper-Backgrounds2.png");
+  background-color: #cccccc;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bar {
+  display: flex;
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 15px;
+  position: absolute;
 }
 
 #note_title {
@@ -32,6 +42,8 @@ body {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+  font-family: "Roboto", sans-serif;
+
 }
 
 #text {
@@ -46,10 +58,16 @@ body {
 #greyarea {
   background-color: grey;
   border: black;
-  height: 150px;
   width: 150px;
-  padding: 10px;
+  height: 150px;
+  padding: 8px;
   margin-right: 10px;
   font-size: 20px;
   font-family: serif;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  border-radius: 3px;
+  background-color: #f8f8f8;
+  resize: both;
+overflow: auto;
 }
