@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Immutable from 'immutable';
 import Note from './note';
 import AddBar from './add_bar';
+import * as firebase from '../firebase';
 
 // example class based component (smart component)
 let z = 0;
@@ -20,6 +21,14 @@ class App extends Component {
     this.updateNote = this.updateNote.bind(this);
   }
 
+  componentDidMount() {
+    firebase.fetchNotes(newNotes =>
+      this.setState({
+        notes: Immutable.Map(newNotes),
+      })
+    );
+  }
+
   addNote(title) {
     const newNote = {
       title,
@@ -28,23 +37,15 @@ class App extends Component {
       y: 100,
       zIndex: z++,
     };
-    console.log(newNote);
-    this.setState({
-      notes: this.state.notes.set(title, newNote),
-    });
-    console.log(this.state.notes.size);
+    firebase.createNote(newNote);
   }
 
   deleteNote(title) {
-    this.setState({
-      notes: this.state.notes.delete(title),
-    });
+    firebase.deleteNote(title);
   }
 
   updateNote(id, fields) {
-    this.setState({
-      notes: this.state.notes.update(id, (n) => { return Object.assign({}, n, fields); }),
-    });
+    firebase.updateNote(id, fields);
   }
 
   render() {
