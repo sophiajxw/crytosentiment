@@ -4,7 +4,7 @@
 
 
 ##### What I did accomplish:
-- Everything in requirement spec in both p1 and p2
+- Everything in requirement spec in both p1 and p2.
 
 
 ##### Extra Credit:
