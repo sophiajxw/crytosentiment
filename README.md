@@ -10,3 +10,9 @@
 ##### Extra Credit:
 - I made my note more stylish.
 - Notes are resizable.
+
+
+### Update:
+- I fixed the position: absolute.
+- Snap to grid.
+- For extra credit, I added zIndex sorting. And when I drag a note, it goes above all other notes.

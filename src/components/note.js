@@ -3,7 +3,6 @@ import Draggable from 'react-draggable';
 import Textarea from 'react-textarea-autosize';
 import marked from 'marked';
 
-
 class Note extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +13,7 @@ class Note extends Component {
     this.onEdit = this.onEdit.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
+    this.onStartDrag = this.onStartDrag.bind(this);
     this.onDrag = this.onDrag.bind(this);
     this.onEditRender = this.onEditRender.bind(this);
     this.onTextRender = this.onTextRender.bind(this);
@@ -55,6 +55,15 @@ class Note extends Component {
     }
   }
 
+  onStartDrag() {
+    if (document.getElementById(this.props.id) === null) {
+      console.log('nullll');
+    } else {
+      document.getElementById(this.props.id).style.zIndex = this.props.zIndex;
+    }
+    this.props.updateZ(this.props.zIndex + 1);
+  }
+
   onDrag(event, ui) {
     this.props.updateNote(this.props.id, { x: ui.x, y: ui.y });
   }
@@ -63,15 +72,15 @@ class Note extends Component {
     return (
       <Draggable
         handle=".note-mover"
-        grid={[25, 25]}
+        grid={[50, 50]}
         defaultPosition={{ x: 50, y: 50 }}
         position={{ x: this.props.note.x, y: this.props.note.y }}
         onStart={this.onStartDrag}
         onDrag={this.onDrag}
         onStop={this.onStopDrag}
       >
-        <div>
-          <div className="note">
+        <div className="note" id={this.props.id} style={{ zIndex: this.props.note.zIndex }}>
+          <div className="top">
             <span id="note_title">{this.props.note.title}</span>
             <i id="note_item" onClick={this.onDelete} className="fa fa-trash-o" />
             {this.onEditRender()}

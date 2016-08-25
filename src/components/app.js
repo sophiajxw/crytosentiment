@@ -5,7 +5,6 @@ import AddBar from './add_bar';
 import * as firebase from '../firebase';
 
 // example class based component (smart component)
-let z = 0;
 
 class App extends Component {
   constructor(props) {
@@ -14,11 +13,13 @@ class App extends Component {
     // init component state here
     this.state = {
       notes: Immutable.Map(),
+      zIndex: 0,
     };
 
     this.addNote = this.addNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
     this.updateNote = this.updateNote.bind(this);
+    this.updateZ = this.updateZ.bind(this);
   }
 
   componentDidMount() {
@@ -27,7 +28,14 @@ class App extends Component {
         notes: Immutable.Map(newNotes),
       })
     );
+
+    firebase.fetchZ(z =>
+      this.setState({
+        zIndex: z.val().zIndex,
+      })
+    );
   }
+
 
   addNote(title) {
     const newNote = {
@@ -35,9 +43,11 @@ class App extends Component {
       text: '',
       x: 100,
       y: 100,
-      zIndex: z++,
+      zIndex: this.state.zIndex,
     };
+    firebase.updateZ(this.state.zIndex++);
     firebase.createNote(newNote);
+    console.log(this.state.zIndex);
   }
 
   deleteNote(title) {
@@ -48,6 +58,11 @@ class App extends Component {
     firebase.updateNote(id, fields);
   }
 
+  updateZ(index) {
+    firebase.updateZ(index);
+    // this.setState({ zIndex: this.state.zIndex + 1 });
+  }
+
   render() {
     return (
       <div>
@@ -55,7 +70,10 @@ class App extends Component {
         {this.state.notes.entrySeq().map(([id, note]) => {
           return (
             <Note updateNote={this.updateNote}
-              onDeleteNote={this.deleteNote} note={note} key={id} id={id}
+              onDeleteNote={this.deleteNote}
+              updateZ={this.updateZ}
+              note={note} key={id} id={id}
+              zIndex={this.state.zIndex}
             />
           );
         })}

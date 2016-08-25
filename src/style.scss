@@ -16,6 +16,15 @@ body {
   position: absolute;
 }
 
+.note {
+  position:absolute;
+}
+
+.top {
+  display: flex;
+  // justify-content: space-between;
+}
+
 #note_title {
   font-size: 20px;
   padding-right: 8px;

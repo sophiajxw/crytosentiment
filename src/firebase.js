@@ -33,3 +33,13 @@ export function updateNote(id, new_content) {
 export function deleteNote(id) {
   database.ref('notes').child(id).remove();
 }
+
+export function updateZ(zIndex) {
+  database.ref('zIndex').set({ zIndex });
+}
+
+export function fetchZ(callback) {
+  database.ref('zIndex').on('value', (snapshot) => {
+    callback(snapshot);
+  });
+}
