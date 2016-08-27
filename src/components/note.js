@@ -62,6 +62,7 @@ class Note extends Component {
       document.getElementById(this.props.id).style.zIndex = this.props.zIndex;
     }
     this.props.updateZ(this.props.zIndex + 1);
+    this.props.updateNote(this.props.id, { zIndex: this.props.zIndex });
   }
 
   onDrag(event, ui) {
@@ -75,6 +76,7 @@ class Note extends Component {
         grid={[50, 50]}
         defaultPosition={{ x: 50, y: 50 }}
         position={{ x: this.props.note.x, y: this.props.note.y }}
+        zIndex={this.props.note.zIndex}
         onStart={this.onStartDrag}
         onDrag={this.onDrag}
         onStop={this.onStopDrag}
