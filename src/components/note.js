@@ -3,11 +3,17 @@ import Draggable from 'react-draggable';
 import Textarea from 'react-textarea-autosize';
 import marked from 'marked';
 
+import Resizable from './Resizable';
+import ResizableBox from './ResizableBox';
+import '../style.scss';
+
 class Note extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isEditing: false,
+      width: 100,
+      height: 100,
     };
 
     this.onEdit = this.onEdit.bind(this);
@@ -43,6 +49,14 @@ class Note extends Component {
     this.props.updateNote(this.props.id, { text: event.target.value });
   }
 
+  onResize = (event, { element, size }) => {
+    this.setState({ width: size.width, height: size.height });
+    this.props.updateNote(this.props.id, { width: size.width, height: size.height });
+  };
+//          <div id="greyarea" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
+//              <span>{this.props.note.text}</span>
+
+
   onTextRender() {
     if (this.state.isEditing) {
       return (
@@ -50,7 +64,13 @@ class Note extends Component {
       );
     } else {
       return (
-        <div id="greyarea" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
+        <div className="greyarea">
+          <Resizable height={this.props.note.height} width={this.props.note.width} onResize={this.onResize}>
+            <div style={{ width: this.props.note.width + 'px', height: this.props.note.height + 'px' }}>
+              <div dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />
+            </div>
+          </Resizable>
+        </div>
       );
     }
   }

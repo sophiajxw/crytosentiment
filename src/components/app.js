@@ -43,6 +43,8 @@ class App extends Component {
       text: '',
       x: 100,
       y: 100,
+      height: 100,
+      width: 100,
       zIndex: this.state.zIndex,
     };
     firebase.updateZ(this.state.zIndex++);
@@ -60,7 +62,6 @@ class App extends Component {
 
   updateZ(index) {
     firebase.updateZ(index);
-    // this.setState({ zIndex: this.state.zIndex + 1 });
   }
 
   render() {
