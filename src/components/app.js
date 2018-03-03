@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Immutable from 'immutable';
 import Note from './note';
 import AddBar from './add_bar';
+import * as firebase from '../firebase';
 
 // example class based component (smart component)
-let z = 0;
 
 class App extends Component {
   constructor(props) {
@@ -13,12 +13,29 @@ class App extends Component {
     // init component state here
     this.state = {
       notes: Immutable.Map(),
+      zIndex: 0,
     };
 
     this.addNote = this.addNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
     this.updateNote = this.updateNote.bind(this);
+    this.updateZ = this.updateZ.bind(this);
   }
+
+  componentDidMount() {
+    firebase.fetchNotes(newNotes =>
+      this.setState({
+        notes: Immutable.Map(newNotes),
+      })
+    );
+
+    firebase.fetchZ(z =>
+      this.setState({
+        zIndex: z.val().zIndex,
+      })
+    );
+  }
+
 
   addNote(title) {
     const newNote = {
@@ -26,25 +43,25 @@ class App extends Component {
       text: '',
       x: 100,
       y: 100,
-      zIndex: z++,
+      height: 100,
+      width: 100,
+      zIndex: this.state.zIndex,
     };
-    console.log(newNote);
-    this.setState({
-      notes: this.state.notes.set(title, newNote),
-    });
-    console.log(this.state.notes.size);
+    firebase.updateZ(this.state.zIndex++);
+    firebase.createNote(newNote);
+    console.log(this.state.zIndex);
   }
 
   deleteNote(title) {
-    this.setState({
-      notes: this.state.notes.delete(title),
-    });
+    firebase.deleteNote(title);
   }
 
   updateNote(id, fields) {
-    this.setState({
-      notes: this.state.notes.update(id, (n) => { return Object.assign({}, n, fields); }),
-    });
+    firebase.updateNote(id, fields);
+  }
+
+  updateZ(index) {
+    firebase.updateZ(index);
   }
 
   render() {
@@ -54,7 +71,10 @@ class App extends Component {
         {this.state.notes.entrySeq().map(([id, note]) => {
           return (
             <Note updateNote={this.updateNote}
-              onDeleteNote={this.deleteNote} note={note} key={id} id={id}
+              onDeleteNote={this.deleteNote}
+              updateZ={this.updateZ}
+              note={note} key={id} id={id}
+              zIndex={this.state.zIndex}
             />
           );
         })}
