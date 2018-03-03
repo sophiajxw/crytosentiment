@@ -2,7 +2,7 @@ body {
   font-family: "Roboto", sans-serif;
   color: rgb(10%, 10%, 10%);
   background: darken(white, 10%);
-  background-image: url("http://images.designtrends.com/wp-content/uploads/2015/12/08123956/Paper-Backgrounds2.png");
+  background-image: url("https://cdn-images-1.medium.com/max/2000/1*8f29YAiwwtEqT9TD_CVtUw.jpeg");
   background-color: #cccccc;
   background-size: cover;
   background-repeat: no-repeat;
@@ -70,4 +70,15 @@ body {
   background-color: #f8f8f8;
   resize: both;
 overflow: auto;
+}
+
+.maincontainer {
+  background-color: grey;
+  border: black;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 }
