@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-=======
 // import Immutable from 'immutable';
 import axios from 'axios';
 // import Note from './note';
 // import AddBar from './add_bar';
->>>>>>> 829a59c63fdef9fa736b2328fecb7773aca2b860
 
 const ROOT_URL = 'http://localhost:5000';
 
@@ -23,8 +20,8 @@ class App extends Component {
       sentiResponse: {},
     };
 
-    this.fetchData = this.fetchData.bind();
-    this.renderSenti = this.renderSenti.bind();
+    this.fetchData = this.fetchData.bind(this);
+    this.renderSenti = this.renderSenti.bind(this);
     this.onClickCryto = this.onClickCryto.bind(this);
   }
 
@@ -83,29 +80,29 @@ class App extends Component {
   }
 
   fetchData(type) {
+    // const that = this;
     axios.get(`${ROOT_URL}/${type}`)
-      .then(
-        (response) => {
-          console.log(response.data);
-          this.setState({
-            hasResponse: true,
-            sentiResponse: response.data,
-          });
-        }).catch(error => {
-          console.log(error);
+      .then((response) => {
+        console.log(response.data);
+        this.setState({
+          hasResponse: true,
+          sentiResponse: response.data,
         });
+      }).catch((error) => {
+        console.log(error);
+      });
   }
 
   renderSenti() {
     return (
       <div>
-        <span>Positive: {this.state.sentiResponse.positive}</span>
-        <span>Positive: {this.state.sentiResponse.negative}</span>
+        <span>Positive: {this.state.sentiResponse.positive}% </span>
+        <span>Positive: {this.state.sentiResponse.negative}% </span>
         <ul>
-          {this.state.sentiResponse.tweets.map((tweet) => {
+          {this.state.sentiResponse.tweet.map((tweet, index) => {
             return (
-              <li>
-                <span>{tweet}</span>
+              <li key={index}>
+                <span>{tweet.text}</span>
               </li>
             );
           })}
