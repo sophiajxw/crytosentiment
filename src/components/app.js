@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
+import Immutable from 'immutable';
+import axios from 'axios';
+// import Note from './note';
+// import AddBar from './add_bar';
+
+const ROOT_URL = 'http://localhost:5000';
+
 import LineChart from './LineChart';
+
 
 class App extends Component {
   constructor(props) {
@@ -49,6 +57,37 @@ class App extends Component {
     });
   }
 
+
+  fetchData() {
+    axios.get(`${ROOT_URL}`)
+      .then(
+        (response) => {
+          console.log(response);
+          this.setState({
+            hasResponse: true,
+            data: response,
+          });
+        }).catch(error => {
+          console.log(error);
+        });
+  }
+
+
+  // getData() {
+  //   fetch(`${ROOT_URL}?token=${TOKEN}`)
+  //     .then(
+  //       (response) => {
+  //         console.log(response);
+  //         this.setState({
+  //           hasResponse: true,
+  //           data: response,
+  //         });
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  // }
 
   render() {
     return (
