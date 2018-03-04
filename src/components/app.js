@@ -17,6 +17,7 @@ class App extends Component {
     this.state = {
       hasResponse: false,
       data: {},
+      sentiResponse: {},
     };
 
     this.fetchData = this.fetchData.bind();
@@ -36,31 +37,31 @@ class App extends Component {
   }
 
   onClickCryto(ticker) {
-    const that = this;
-
-    fetch('https://apiv2.bitcoinaverage.com/indices/global/history/BTCUSD?period=daily&?format=json', { mode: 'cors' })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error('Error fetching Cryto prices.');
-      }
-    })
-    .then(data => {
-      const dataSet = data.slice(0, 60);
-      const newSet = [];
-
-      for (let x = 0; x <= 59; x++) {
-        const y = dataSet[59 - x].average;
-        newSet.push({ x, y });
-      }
-
-      that.setState({ data: newSet });
-    })
-    .catch(error => {
-      console.log(error);
-    });
-    fetchData('Bitcoin');
+    // const that = this;
+    //
+    // fetch('https://apiv2.bitcoinaverage.com/indices/global/history/BTCUSD?period=daily&?format=json', { mode: 'cors' })
+    // .then(response => {
+    //   if (response.ok) {
+    //     return response.json();
+    //   } else {
+    //     throw new Error('Error fetching Cryto prices.');
+    //   }
+    // })
+    // .then(data => {
+    //   const dataSet = data.slice(0, 60);
+    //   const newSet = [];
+    //
+    //   for (let x = 0; x <= 59; x++) {
+    //     const y = dataSet[59 - x].average;
+    //     newSet.push({ x, y });
+    //   }
+    //
+    //   that.setState({ data: newSet });
+    // })
+    // .catch(error => {
+    //   // console.log(error);
+    // });
+    this.fetchData(ticker);
   }
 
   // {this.state.notes.entrySeq().map(([id, note]) => {
@@ -76,7 +77,7 @@ class App extends Component {
           console.log(response.data);
           this.setState({
             hasResponse: true,
-            data: response.data,
+            sentiResponse: response.data,
           });
         }).catch(error => {
           console.log(error);
@@ -87,7 +88,7 @@ class App extends Component {
   renderSenti() {
     return (
       <div>
-        {this.state.data}
+        {this.state.sentiResponse}
       </div>
     );
   }
@@ -97,11 +98,11 @@ class App extends Component {
       <div className="maincontainer">
         <span id="title">IBM Watson Cryptocurrency Sentiment Analysis</span>
         <div className="button-group">
-          <button type="button" className="btn" onClick={this.onClickCryto('btc')}>Bitcoin</button>
-          <button type="button" className="btn" onClick={this.onClickCryto('eth')}>Ethereum</button>
-          <button type="button" className="btn" onClick={this.onClickCryto('dash')}>Dash</button>
-          <button type="button" className="btn" onClick={this.onClickCryto('lit')}>Litecoin</button>
-          <button type="button" className="btn" onClick={this.onClickCryto('xrp')}>XRP</button>
+          <button type="button" className="btn" onClick={() => this.onClickCryto('bitcoin')}>Bitcoin</button>
+          <button type="button" className="btn" onClick={() => this.onClickCryto('ethereum')}>Ethereum</button>
+          <button type="button" className="btn" onClick={() => this.onClickCryto('dash')}>Dash</button>
+          <button type="button" className="btn" onClick={() => this.onClickCryto('litecoin')}>Litecoin</button>
+          <button type="button" className="btn" onClick={() => this.onClickCryto('xrp')}>XRP</button>
         </div>
         <div className="lineChart">
           <div className="header">Current Price: </div>
