@@ -58,14 +58,14 @@ class TwitterClient(object):
 		'''
 
 		# create TextBlob object of passed tweet text
-		print tweet
+		# print tweet
 		try:
 			response = self.natural_language_understanding.analyze(
 			  text=self.clean_tweet(tweet),
 			  features=Features(
 				sentiment=SentimentOptions(
 				  )))
-			print response["sentiment"]["document"]["label"]
+			# print response["sentiment"]["document"]["label"]
 			return response["sentiment"]["document"]["label"]
 		except:
 			return "neutral"
@@ -133,7 +133,7 @@ def runTwitterClient(cryptoType):
  		'tweet': tweets
  	}
  	return_json = json.dumps(dic)
- 	print return_json
+ 	return return_json
  
 # if __name__ == "__main__":
 # 	# calling main function
