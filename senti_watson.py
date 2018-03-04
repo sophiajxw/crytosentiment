@@ -105,12 +105,12 @@ class TwitterClient(object):
 			# print error (if any)
 			print("Error : " + str(e))
  
-def main():
+def runTwitterClient(cryptoType):
 	# creating object of TwitterClient Class
 	api = TwitterClient()
 	# calling function to get tweets
 	
-	tweets = api.get_tweets(query = 'bitcoin', count = 1000)
+	tweets = api.get_tweets(query = cryptoType, count = 1000)
  
 	# picking positive tweets from tweets
 	ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
@@ -133,7 +133,7 @@ def main():
 	for tweet in ntweets[:10]:
 		print(tweet['text'])
  
-if __name__ == "__main__":
-	# calling main function
-	main()
+# if __name__ == "__main__":
+# 	# calling main function
+# 	main()
 
