@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
+=======
+// import Immutable from 'immutable';
+import axios from 'axios';
+// import Note from './note';
+// import AddBar from './add_bar';
+>>>>>>> 829a59c63fdef9fa736b2328fecb7773aca2b860
 
 const ROOT_URL = 'http://localhost:5000';
 
@@ -10,8 +17,14 @@ class App extends Component {
     super(props);
 
     // init component state here
-    this.state = { data: [] };
+    this.state = {
+      hasResponse: false,
+      data: {},
+      sentiResponse: {},
+    };
 
+    this.fetchData = this.fetchData.bind();
+    this.renderSenti = this.renderSenti.bind();
     this.onClickCryto = this.onClickCryto.bind(this);
   }
 
@@ -65,40 +78,50 @@ class App extends Component {
     .catch(error => {
       console.log(error);
     });
+
+    this.fetchData(ticker);
   }
 
+  fetchData(type) {
+    axios.get(`${ROOT_URL}/${type}`)
+      .then(
+        (response) => {
+          console.log(response.data);
+          this.setState({
+            hasResponse: true,
+            sentiResponse: response.data,
+          });
+        }).catch(error => {
+          console.log(error);
+        });
+  }
 
-  // fetchData() {
-  //   axios.get(`${ROOT_URL}`)
-  //     .then(
-  //       (response) => {
-  //         console.log(response);
-  //         this.setState({
-  //           hasResponse: true,
-  //           data: response,
-  //         });
-  //       }).catch(error => {
-  //         console.log(error);
-  //       });
-  // }
+  renderSenti() {
+    return (
+      <div>
+        <span>Positive: {this.state.sentiResponse}</span>
+        {this.state.sentiResponse}
+      </div>
+    );
+  }
 
   render() {
     return (
       <div className="maincontainer">
         <span id="title">IBM Watson Cryptocurrency Sentiment Analysis</span>
         <div className="button-group">
-          <button type="button" className="btn" onClick={this.onClickCryto('btc')}>Bitcoin</button>
-          <button type="button" className="btn" onClick={this.onClickCryto('eth')}>Ethereum</button>
-          <button type="button" className="btn" onClick={this.onClickCryto('dash')}>Dash</button>
-          <button type="button" className="btn" onClick={this.onClickCryto('lit')}>Litecoin</button>
-          <button type="button" className="btn" onClick={this.onClickCryto('xrp')}>XRP</button>
+          <button type="button" className="btn" onClick={() => this.onClickCryto('bitcoin')}>Bitcoin</button>
+          <button type="button" className="btn" onClick={() => this.onClickCryto('ethereum')}>Ethereum</button>
+          <button type="button" className="btn" onClick={() => this.onClickCryto('dash')}>Dash</button>
+          <button type="button" className="btn" onClick={() => this.onClickCryto('litecoin')}>Litecoin</button>
+          <button type="button" className="btn" onClick={() => this.onClickCryto('xrp')}>XRP</button>
         </div>
         <div className="lineChart">
           <div className="header">Current Price: </div>
           <LineChart data={this.state.data} />
         </div>
+        {this.state.hasResponse && this.renderSenti()}
       </div>
-
     );
   }
 }
