@@ -27,7 +27,7 @@ class LineChart extends Component {
   }
   getSvgY(y) {
     const { svgHeight } = this.props;
-    return svgHeight - (y / this.getMaxY() * svgHeight);
+    return svgHeight - (y / (this.getMaxY() - 11000) * svgHeight);
   }
 
   makePath() {
@@ -46,11 +46,6 @@ class LineChart extends Component {
     const maxX = this.getMaxX();
     const minY = this.getMinY();
     const maxY = this.getMaxY();
-
-    console.log(minX);
-    console.log(maxX);
-    console.log(minY);
-    console.log(maxY);
 
     return (
       <g className="linechart_axis">

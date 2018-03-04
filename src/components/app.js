@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import Immutable from 'immutable';
-import axios from 'axios';
-// import Note from './note';
-// import AddBar from './add_bar';
 
 const ROOT_URL = 'http://localhost:5000';
 
@@ -33,7 +29,21 @@ class App extends Component {
   onClickCryto(ticker) {
     const that = this;
 
-    fetch('https://apiv2.bitcoinaverage.com/indices/global/history/BTCUSD?period=daily&?format=json', { mode: 'cors' })
+    let url = 'https://apiv2.bitcoinaverage.com/indices/global/history/BTCUSD?period=daily&?format=json';
+
+    if (ticker === 'btc') {
+      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/BTCUSD?period=daily&?format=json';
+    } else if (ticker === 'eth') {
+      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/LTCUSD?period=daily&?format=json';
+    } else if (ticker === 'dash') {
+      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/DASHUSD?period=daily&?format=json';
+    } else if (ticker === 'xrp') {
+      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/XRPUSD?period=daily&?format=json';
+    } else if (ticker === 'lit') {
+      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/LTCUSD?period=daily&?format=json';
+    }
+
+    fetch(url, { mode: 'cors' })
     .then(response => {
       if (response.ok) {
         return response.json();
@@ -58,23 +68,8 @@ class App extends Component {
   }
 
 
-  fetchData() {
-    axios.get(`${ROOT_URL}`)
-      .then(
-        (response) => {
-          console.log(response);
-          this.setState({
-            hasResponse: true,
-            data: response,
-          });
-        }).catch(error => {
-          console.log(error);
-        });
-  }
-
-
-  // getData() {
-  //   fetch(`${ROOT_URL}?token=${TOKEN}`)
+  // fetchData() {
+  //   axios.get(`${ROOT_URL}`)
   //     .then(
   //       (response) => {
   //         console.log(response);
@@ -82,11 +77,9 @@ class App extends Component {
   //           hasResponse: true,
   //           data: response,
   //         });
-  //       },
-  //       (error) => {
+  //       }).catch(error => {
   //         console.log(error);
-  //       }
-  //     );
+  //       });
   // }
 
   render() {
