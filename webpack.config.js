@@ -24,6 +24,9 @@ module.exports = {
       // You could also use other loaders the same way. I. e. the autoprefixer-loader
     ],
   },
+  node: {
+    child_process: 'empty',
+  },
   postcss: [autoprefixer({ browsers: ['last 2 versions'] })],
   plugins: [
     new ExtractTextPlugin('bundle.css'),
