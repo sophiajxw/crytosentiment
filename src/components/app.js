@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Immutable from 'immutable';
+// import Immutable from 'immutable';
 import axios from 'axios';
 // import Note from './note';
 // import AddBar from './add_bar';
@@ -88,6 +88,7 @@ class App extends Component {
   renderSenti() {
     return (
       <div>
+        <span>Positive: {this.state.sentiResponse}</span>
         {this.state.sentiResponse}
       </div>
     );
