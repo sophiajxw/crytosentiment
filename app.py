@@ -53,9 +53,9 @@ app = Flask(__name__)
 @app.route("/<crypto>", methods=["GET"])
 @crossdomain(origin='*')
 def senti(crypto):
-    senti_watson.runTwitterClient(crypto)
+    return senti_watson.runTwitterClient(crypto)
 
-    return ""
+    #return ""
 
 
 if __name__ == '__main__':
