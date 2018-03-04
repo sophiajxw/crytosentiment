@@ -16,10 +16,11 @@ class App extends Component {
     // init component state here
     this.state = {
       hasResponse: false,
-      data: [],
+      data: {},
     };
 
     this.fetchData = this.fetchData.bind();
+    this.renderSenti = this.renderSenti.bind();
   }
 
   onClickBitcoin() {
@@ -37,33 +38,23 @@ class App extends Component {
     .catch(error => {
       console.log(error);
     });
+    fetchData('Bitcoin');
   }
 
-  onClickEthereum() {
+  // {this.state.notes.entrySeq().map(([id, note]) => {
+//   return (
+//     <div />
+//   );
+// })}
 
-  }
-
-  onClickBitcoinCash() {
-
-  }
-
-  onClickLitecoin() {
-
-  }
-
-  onClickXRP() {
-
-  }
-
-
-  fetchData() {
-    axios.get(`${ROOT_URL}`)
+  fetchData(type) {
+    axios.get(`${ROOT_URL}/${type}`)
       .then(
         (response) => {
-          console.log(response);
+          console.log(response.data);
           this.setState({
             hasResponse: true,
-            data: response,
+            data: response.data,
           });
         }).catch(error => {
           console.log(error);
@@ -71,21 +62,13 @@ class App extends Component {
   }
 
 
-  // getData() {
-  //   fetch(`${ROOT_URL}?token=${TOKEN}`)
-  //     .then(
-  //       (response) => {
-  //         console.log(response);
-  //         this.setState({
-  //           hasResponse: true,
-  //           data: response,
-  //         });
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-  // }
+  renderSenti() {
+    return (
+      <div>
+        {this.state.data}
+      </div>
+    );
+  }
 
   render() {
     return (
@@ -99,8 +82,8 @@ class App extends Component {
           <button type="button" className="btn" onClick={this.onClickXRP}>XRP</button>
         </div>
         <LineChart data={this.state.data} />
+        {this.state.hasResponse && this.renderSenti()}
       </div>
-
     );
   }
 }
