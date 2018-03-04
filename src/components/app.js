@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
+=======
 // import Immutable from 'immutable';
 import axios from 'axios';
 // import Note from './note';
 // import AddBar from './add_bar';
+>>>>>>> 829a59c63fdef9fa736b2328fecb7773aca2b860
 
 const ROOT_URL = 'http://localhost:5000';
 
@@ -37,38 +40,47 @@ class App extends Component {
   }
 
   onClickCryto(ticker) {
-    // const that = this;
-    //
-    // fetch('https://apiv2.bitcoinaverage.com/indices/global/history/BTCUSD?period=daily&?format=json', { mode: 'cors' })
-    // .then(response => {
-    //   if (response.ok) {
-    //     return response.json();
-    //   } else {
-    //     throw new Error('Error fetching Cryto prices.');
-    //   }
-    // })
-    // .then(data => {
-    //   const dataSet = data.slice(0, 60);
-    //   const newSet = [];
-    //
-    //   for (let x = 0; x <= 59; x++) {
-    //     const y = dataSet[59 - x].average;
-    //     newSet.push({ x, y });
-    //   }
-    //
-    //   that.setState({ data: newSet });
-    // })
-    // .catch(error => {
-    //   // console.log(error);
-    // });
+    const that = this;
+
+    let url = 'https://apiv2.bitcoinaverage.com/indices/global/history/BTCUSD?period=daily&?format=json';
+
+    if (ticker === 'btc') {
+      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/BTCUSD?period=daily&?format=json';
+    } else if (ticker === 'eth') {
+      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/LTCUSD?period=daily&?format=json';
+    } else if (ticker === 'dash') {
+      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/DASHUSD?period=daily&?format=json';
+    } else if (ticker === 'xrp') {
+      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/XRPUSD?period=daily&?format=json';
+    } else if (ticker === 'lit') {
+      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/LTCUSD?period=daily&?format=json';
+    }
+
+    fetch(url, { mode: 'cors' })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Error fetching Cryto prices.');
+      }
+    })
+    .then(data => {
+      const dataSet = data.slice(0, 60);
+      const newSet = [];
+
+      for (let x = 0; x <= 59; x++) {
+        const y = dataSet[59 - x].average;
+        newSet.push({ x, y });
+      }
+
+      that.setState({ data: newSet });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
     this.fetchData(ticker);
   }
-
-  // {this.state.notes.entrySeq().map(([id, note]) => {
-//   return (
-//     <div />
-//   );
-// })}
 
   fetchData(type) {
     axios.get(`${ROOT_URL}/${type}`)
@@ -83,7 +95,6 @@ class App extends Component {
           console.log(error);
         });
   }
-
 
   renderSenti() {
     return (
