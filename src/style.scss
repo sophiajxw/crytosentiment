@@ -67,3 +67,19 @@ body {
   border-radius: 5px;
   text-transform: uppercase;
 }
+
+.lineChart {
+  width: 70%;
+  height: auto;
+  margin-top: 50px;
+}
+
+.linechart_path {
+  stroke-width: 1;
+  fill: none;
+}
+
+.linechart_axis {
+  stroke-width: 3;
+  stroke: #bdc3c7;
+}
