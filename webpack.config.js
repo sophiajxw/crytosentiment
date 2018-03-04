@@ -5,6 +5,9 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
   stats: { colors: true },
   devtool: 'inline-source-map',
+  devServer: {
+    headers: { 'Access-Control-Allow-Origin': 'http://localhost:8080' },
+  },
   entry: ['babel-polyfill', './src'],
   output: {
     path: 'build',

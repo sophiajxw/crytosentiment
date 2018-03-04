@@ -8,77 +8,62 @@ body {
   background-repeat: no-repeat;
 }
 
-.bar {
-  display: flex;
-  text-align: center;
-  margin-top: 30px;
-  margin-left: 15px;
+.maincontainer {
   position: absolute;
-}
-
-#note_title {
-  font-size: 20px;
-  padding-right: 8px;
-}
-
-#note_item {
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-#searchbar {
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255,255,255,0.5);
   height: 100%;
-  width: 300px;
-  padding: 10px;
-  margin-right: 10px;
-  font-size: 16px;
+  width: 90%;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+#title {
+  height: auto;
+  width: 100%;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 20px;
+  font-size: 50px;
+  font-family: serif;
+  font-weight: bold;
+}
+
+.button-group{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 80%;
+  height: 30px;
+  margin-top: 30px;
+}
+
+.btn{
+  height: 40px;
+  width: 200px;
+  font-size: 20px;
+  background-color: rgb(239, 178, 26);
+  border: 0.2px solid grey;
+  border-radius: 5px;
 }
 
 #button {
-  background-color: green;
   color: white;
-  padding: 10px 30px;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  font-family: "Roboto", sans-serif;
-
-}
-
-#text {
-  height: 150px;
-  width: 150px;
-  padding: 10px;
-  margin-right: 10px;
-  font-size: 20px;
-  font-family: serif;
-}
-
-#greyarea {
-  background-color: grey;
-  border: black;
-  width: 150px;
-  height: 150px;
-  padding: 8px;
-  margin-right: 10px;
-  font-size: 20px;
-  font-family: serif;
-  box-sizing: border-box;
-  border: 3px solid #ccc;
-  border-radius: 3px;
-  background-color: #f8f8f8;
-  resize: both;
-overflow: auto;
-}
-
-.maincontainer {
-  background-color: grey;
-  border: black;
-  width: 90%;
-  height: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
+  background-color: rgb(239, 178, 26);
+  border: 2px solid #0099CC;
+  border-radius: 5px;
+  text-transform: uppercase;
 }
