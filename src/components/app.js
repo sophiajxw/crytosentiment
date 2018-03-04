@@ -88,8 +88,17 @@ class App extends Component {
   renderSenti() {
     return (
       <div>
-        <span>Positive: {this.state.sentiResponse}</span>
-        {this.state.sentiResponse}
+        <span>Positive: {this.state.sentiResponse.positive}</span>
+        <span>Positive: {this.state.sentiResponse.negative}</span>
+        <ul>
+          {this.state.sentiResponse.tweets.map((tweet) => {
+            return (
+              <li>
+                <span>{tweet}</span>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }
