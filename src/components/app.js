@@ -21,8 +21,8 @@ class App extends Component {
       activePoint: null,
     };
 
-    this.fetchData = this.fetchData.bind();
-    this.renderSenti = this.renderSenti.bind();
+    this.fetchData = this.fetchData.bind(this);
+    this.renderSenti = this.renderSenti.bind(this);
     this.onClickCryto = this.onClickCryto.bind(this);
   }
 
@@ -94,24 +94,33 @@ class App extends Component {
   }
 
   fetchData(type) {
+    // const that = this;
     axios.get(`${ROOT_URL}/${type}`)
-      .then(
-        (response) => {
-          console.log(response.data);
-          this.setState({
-            hasResponse: true,
-            sentiResponse: response.data,
-          });
-        }).catch(error => {
-          console.log(error);
+      .then((response) => {
+        console.log(response.data);
+        this.setState({
+          hasResponse: true,
+          sentiResponse: response.data,
         });
+      }).catch((error) => {
+        console.log(error);
+      });
   }
 
   renderSenti() {
     return (
       <div>
-        <span>Positive: {this.state.sentiResponse}</span>
-        {this.state.sentiResponse}
+        <span>Positive: {this.state.sentiResponse.positive}% </span>
+        <span>Positive: {this.state.sentiResponse.negative}% </span>
+        <ul>
+          {this.state.sentiResponse.tweet.map((tweet, index) => {
+            return (
+              <li key={index}>
+                <span>{tweet.text}</span>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }
