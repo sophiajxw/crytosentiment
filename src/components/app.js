@@ -177,7 +177,10 @@ class App extends Component {
   render() {
     return (
       <div className="maincontainer">
-        <span id="title">IBM Watson Cryptocurrency Sentiment Analysis</span>
+        <div className="top">
+          <img src="https://scontent.fzty2-1.fna.fbcdn.net/v/t34.0-12/28721652_1644944218893229_680542085_n.png?oh=333dd2a66969965596ff828b6071310c&oe=5A9E90A5" />
+          <span id="title">IBM Watson Cryptocurrency Sentiment Analysis</span>
+        </div>
         <div className="button-group">
           <button type="button" className="btn" onClick={() => this.onClickCryto('bitcoin')}>Bitcoin</button>
           <button type="button" className="btn" onClick={() => this.onClickCryto('ethereum')}>Ethereum</button>
