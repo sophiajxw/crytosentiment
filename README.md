@@ -1,12 +1,9 @@
-## CS 52 HW 3: Js-starter with react
-### Author: Xinwei Jiang
-### Date: July 19, 2016
+## CS 89 Final Project
+### Author: Xinwei Jiang, Weijia Tang, Jennifer Jain, Tianyu Li
+### Date: Mar 5, 2018
 
 
-##### What I did accomplish:
-- Everything in requirement spec
-
-
-##### Extra Credit:
-- I made my note more stylish.
-- Notes are resizable.
+##### Setup
+- Run npm-start
+- Open another tab of terminal and run Python app.py
+- Go to http://localhost:8080/
