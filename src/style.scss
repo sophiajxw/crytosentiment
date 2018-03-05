@@ -9,14 +9,14 @@ body {
 }
 
 .maincontainer {
-  position: absolute;
+  overflow: auto;
   margin: auto;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   background-color: rgba(255,255,255,0.8);
-  height: 100%;
+  height: auto;
   width: 90%;
   border: 2px solid #ccc;
   border-radius: 10px;
@@ -74,7 +74,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 80%;
-  height: 50px;
+  height: auto;
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -177,12 +177,14 @@ body {
 }
 
 .senti {
+  flex: 1;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
 }
 
 .sentiContainer {
+  flex: 1;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
