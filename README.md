@@ -4,6 +4,6 @@
 
 
 ##### Setup
-- Run `npm-start`
-- Open another tab of terminal and run `Python app.py`
+- Run `npm start` on the terminal
+- Open another tab of terminal and run `python app.py` under same directory
 - Go to `http://localhost:8080/`
