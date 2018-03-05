@@ -4,7 +4,7 @@ import axios from 'axios';
 const ROOT_URL = 'http://localhost:5000';
 
 import LineChart from './LineChart';
-
+import ToolTip from './ToolTip';
 
 class App extends Component {
   constructor(props) {
@@ -27,14 +27,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    const data = [];
-    for (let x = 0; x <= 30; x++) {
-      const random = Math.random();
-      const temp = data.length > 0 ? data[data.length - 1].y : 50;
-      const y = random >= 0.45 ? temp + Math.floor(random * 20) : temp - Math.floor(random * 20);
-      data.push({ x, y });
-    }
-    this.setState({ data });
+
   }
 
   onClickCryto(ticker) {
@@ -73,7 +66,11 @@ class App extends Component {
 
       for (let x = 0; x <= 59; x++) {
         const y = dataSet[59 - x].average;
-        newSet.push({ x, y });
+        const t = 59 - x;
+        let d = t + ' min ago';
+        if (t === 0) d = 'now';
+        const p = '$ ' + y;
+        newSet.push({ d, p, x, y });
       }
 
       that.setState({ data: newSet });
@@ -94,7 +91,6 @@ class App extends Component {
   }
 
   fetchData(type) {
-    // const that = this;
     axios.get(`${ROOT_URL}/${type}`)
       .then((response) => {
         console.log(response.data);
@@ -139,6 +135,11 @@ class App extends Component {
         {this.state.currentPrice !== 0 &&
           <div className="chart">
             <div id="header">Current {this.state.ticker} Price: {this.state.currentPrice} USD</div>
+            <div className="row">
+              <div className="popup">
+                {this.state.hoverLoc ? <ToolTip hoverLoc={this.state.hoverLoc} activePoint={this.state.activePoint} /> : null}
+              </div>
+            </div>
             <LineChart data={this.state.data} onChartHover={(a, b) => this.handleChartHover(a, b)} />
             <div id="anotation">{this.state.ticker} price in the past hour</div>
           </div>
@@ -149,8 +150,6 @@ class App extends Component {
     );
   }
 }
-
-// {this.state.hasResponse && this.renderSenti()}
 
 
 export default App;
