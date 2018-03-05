@@ -15,7 +15,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.8);
   height: 100%;
   width: 90%;
   border: 2px solid #ccc;
@@ -28,6 +28,7 @@ body {
   margin-top: 50px;
   margin-bottom: 50px;
   text-align: center;
+  flex: 1;
 }
 
 #title {
@@ -39,10 +40,10 @@ body {
   font-size: 50px;
   font-family: serif;
   font-weight: bold;
+  position: relative;
 }
 
 .button-group{
-  flex: 1;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -68,18 +69,64 @@ body {
   text-transform: uppercase;
 }
 
-.lineChart {
-  width: 70%;
-  height: 300px;
-  margin-top: 50px;
+.chart {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 50px;
+  margin-top: 30px;
 }
 
+#header {
+  height: auto;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  font-size: 20px;
+  font-family: "Gill Sans", sans-serif;
+  font-weight: bold;
+}
+
+#anotation {
+  height: auto;
+  width: 100%;
+  margin-top: 5px;
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.linechart {
+  padding: 8px;
+}
 .linechart_path {
-  stroke-width: 1;
+  stroke-width: 3;
   fill: none;
 }
 
 .linechart_axis {
-  stroke-width: 3;
   stroke: #bdc3c7;
+}
+
+.linechart_point {
+  fill: #fff;
+  stroke-width: 2;
+}
+
+.linechart_area {
+  padding: 8px;
+  fill: #64B5F6;
+  stroke: none;
+  opacity: .4;
+}
+
+.linechart_label {
+ fill: #64B5F6;
+ font-weight: 700;
+}
+
+.hoverLine {
+  stroke: #7D95B6;
+  stroke-width: 1;
 }

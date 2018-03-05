@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-=======
-// import Immutable from 'immutable';
 import axios from 'axios';
-// import Note from './note';
-// import AddBar from './add_bar';
->>>>>>> 829a59c63fdef9fa736b2328fecb7773aca2b860
 
 const ROOT_URL = 'http://localhost:5000';
 
@@ -21,6 +15,10 @@ class App extends Component {
       hasResponse: false,
       data: {},
       sentiResponse: {},
+      currentPrice: 0,
+      ticker: '',
+      hoverLoc: null,
+      activePoint: null,
     };
 
     this.fetchData = this.fetchData.bind();
@@ -44,16 +42,21 @@ class App extends Component {
 
     let url = 'https://apiv2.bitcoinaverage.com/indices/global/history/BTCUSD?period=daily&?format=json';
 
-    if (ticker === 'btc') {
+    if (ticker === 'bitcoin') {
       url = 'https://apiv2.bitcoinaverage.com/indices/global/history/BTCUSD?period=daily&?format=json';
-    } else if (ticker === 'eth') {
-      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/LTCUSD?period=daily&?format=json';
+      this.setState({ ticker: 'Bitcoin' });
+    } else if (ticker === 'ethereum') {
+      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/ETHUSD?period=daily&?format=json';
+      this.setState({ ticker: 'Ethereum' });
     } else if (ticker === 'dash') {
-      url = 'https://apiv2.bitcoinaverage.com/indices/global/history/DASHUSD?period=daily&?format=json';
+      url = 'https://apiv2.bitcoinaverage.com/indices/local/history/DASHUSD?period=daily&?format=json';
+      this.setState({ ticker: 'Dash' });
     } else if (ticker === 'xrp') {
       url = 'https://apiv2.bitcoinaverage.com/indices/global/history/XRPUSD?period=daily&?format=json';
-    } else if (ticker === 'lit') {
+      this.setState({ ticker: 'XRP' });
+    } else if (ticker === 'litecoin') {
       url = 'https://apiv2.bitcoinaverage.com/indices/global/history/LTCUSD?period=daily&?format=json';
+      this.setState({ ticker: 'Litecoin' });
     }
 
     fetch(url, { mode: 'cors' })
@@ -74,12 +77,20 @@ class App extends Component {
       }
 
       that.setState({ data: newSet });
+      that.setState({ currentPrice: newSet[0].y });
     })
     .catch(error => {
       console.log(error);
     });
 
     this.fetchData(ticker);
+  }
+
+  handleChartHover(hoverLoc, activePoint) {
+    this.setState({
+      hoverLoc,
+      activePoint,
+    });
   }
 
   fetchData(type) {
@@ -116,15 +127,21 @@ class App extends Component {
           <button type="button" className="btn" onClick={() => this.onClickCryto('litecoin')}>Litecoin</button>
           <button type="button" className="btn" onClick={() => this.onClickCryto('xrp')}>XRP</button>
         </div>
-        <div className="lineChart">
-          <div className="header">Current Price: </div>
-          <LineChart data={this.state.data} />
-        </div>
+        {this.state.currentPrice !== 0 &&
+          <div className="chart">
+            <div id="header">Current {this.state.ticker} Price: {this.state.currentPrice} USD</div>
+            <LineChart data={this.state.data} onChartHover={(a, b) => this.handleChartHover(a, b)} />
+            <div id="anotation">{this.state.ticker} price in the past hour</div>
+          </div>
+        }
+        {this.state.currentPrice === 0 && <div className="chart" />}
         {this.state.hasResponse && this.renderSenti()}
       </div>
     );
   }
 }
+
+// {this.state.hasResponse && this.renderSenti()}
 
 
 export default App;

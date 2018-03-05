@@ -7,5 +7,4 @@ import './style.scss';
 
 // entry point that just renders app
 // could be used for routing at some point
-console.log('hello');
 ReactDOM.render(<App />, document.getElementById('main'));
