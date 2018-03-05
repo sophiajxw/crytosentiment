@@ -76,6 +76,7 @@ body {
   width: 80%;
   height: 50px;
   margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 #header {
@@ -154,4 +155,64 @@ body {
 
 .popup {
   min-height: 50px;
+}
+
+.sentimentNumber {
+  display: flex;
+  justify-content: space-between;
+}
+
+.positiveNum {
+  font-size: 28px;
+  font-family: "Gill Sans", sans-serif;
+  font-weight: bold;
+  color: green;
+}
+
+.negativeNum {
+  font-size: 28px;
+  font-family: "Gill Sans", sans-serif;
+  font-weight: bold;
+  color: red;
+}
+
+.senti {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.sentiContainer {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  margin: 20px;
+}
+
+.positiveTweets {
+  // border-bottom: 1px solid green;
+  list-style-type: none;
+  padding: 8px;
+  margin: 10px;
+  background-color: rgba(0,100,0,0.3);
+  height: 58px;
+  text-align: left;
+}
+
+.negativeTweets {
+  // border-bottom: 1px solid red;
+  list-style-type: none;
+  padding: 8px;
+  margin: 10px;
+  background-color: rgba(100,0,0,0.3);
+  height: 58px;
+  text-align: left;
+}
+
+.sentiTitle {
+  font-size: 32px;
+  font-family: "Gill Sans", sans-serif;
+  font-weight: bold;
 }

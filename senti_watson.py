@@ -78,7 +78,7 @@ class TwitterClient(object):
 
 		try:
 			# call twitter api to fetch tweets
-			fetched_tweets = self.api.search(q = query, count = count)
+			fetched_tweets = self.api.search(q = query, count = count, lang = "en", verified = "true")
 
 			# parsing tweets one by one
 			for tweet in fetched_tweets:
@@ -130,7 +130,8 @@ def runTwitterClient(cryptoType):
  	print positive_percentage
  	dic = {'positive': positive_percentage,
  		'negative': negative_percentage,
- 		'tweet': tweets[:10]
+ 		'ptweets': ptweets[:5],
+        'ntweets': ntweets[:5],
  	}
  	return_json = json.dumps(dic)
  	return return_json
