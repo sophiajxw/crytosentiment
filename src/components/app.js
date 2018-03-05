@@ -1,10 +1,48 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Tweet from 'react-tweet';
 
 const ROOT_URL = 'http://localhost:5000';
 
 import LineChart from './LineChart';
 import ToolTip from './ToolTip';
+
+// positive: 23,
+// negative: 15,
+// ptweets: [
+//   {
+//     text: 'this is a mock tweet #1 sdafsdaf sdfsdfsd',
+//   },
+//   {
+//     text: 'this is a mock tweet #1 dsafsadf sdfsdfsdfdsfdsafsd',
+//   },
+//   {
+//     text: 'this is a mock tweet #1 sdaf sdafsdaf dsafdsfdsfdsfdsafsdfsdaf',
+//   },
+//   {
+//     text: 'this is a mock tweet #1 dsaf sda fasdf dsf ',
+//   },
+//   {
+//     text: 'this is a mock tweet #1 sadf sd sdaf sdaf sdaf dsaf dsafdsf',
+//   },
+// ],
+// ntweets: [
+//   {
+//     text: 'this is a mock tweet #1ads fidslfjlsdaflksdjaflk dsalkkfklsdajfl;ksdajf',
+//   },
+//   {
+//     text: 'another mock tweet sdlakfjlskdjflkasdjflkd lksdjaf lksdjflk;sadfds flksda',
+//   },
+//   {
+//     text: 'this is a mock tweet #1 sdaflkjlksdfjlksda lkdsjf klsdajf lksdjflkdsjflka sdj',
+//   },
+//   {
+//     text: 'this is a mock tweet #1 sadklfjlksdjfalk lksdfjlksadfj dsaf lkjlkdsfa j',
+//   },
+//   {
+//     text: 'this is a mock tweet #1 sdaklfjlkdsjaflkadsjf lsdkajf lkdsjf lkds fsda ',
+//   },
+// ],
 
 class App extends Component {
   constructor(props) {
@@ -12,46 +50,9 @@ class App extends Component {
 
     // init component state here
     this.state = {
-      hasResponse: true,
+      hasResponse: false,
       data: {},
-      sentiResponse: {
-        positive: 23,
-        negative: 15,
-        ptweets: [
-          {
-            text: 'this is a mock tweet #1 sdafsdaf sdfsdfsd',
-          },
-          {
-            text: 'this is a mock tweet #1 dsafsadf sdfsdfsdfdsfdsafsd',
-          },
-          {
-            text: 'this is a mock tweet #1 sdaf sdafsdaf dsafdsfdsfdsfdsafsdfsdaf',
-          },
-          {
-            text: 'this is a mock tweet #1 dsaf sda fasdf dsf ',
-          },
-          {
-            text: 'this is a mock tweet #1 sadf sd sdaf sdaf sdaf dsaf dsafdsf',
-          },
-        ],
-        ntweets: [
-          {
-            text: 'this is a mock tweet #1ads fidslfjlsdaflksdjaflk dsalkkfklsdajfl;ksdajf',
-          },
-          {
-            text: 'another mock tweet sdlakfjlskdjflkasdjflkd lksdjaf lksdjflk;sadfds flksda',
-          },
-          {
-            text: 'this is a mock tweet #1 sdaflkjlksdfjlksda lkdsjf klsdajf lksdjflkdsjflka sdj',
-          },
-          {
-            text: 'this is a mock tweet #1 sadklfjlksdjfalk lksdfjlksadfj dsaf lkjlkdsfa j',
-          },
-          {
-            text: 'this is a mock tweet #1 sdaklfjlkdsjaflkadsjf lsdkajf lkdsjf lkds fsda ',
-          },
-        ],
-      },
+      sentiResponse: {},
       currentPrice: 0,
       ticker: '',
       hoverLoc: null,
@@ -143,7 +144,7 @@ class App extends Component {
   renderSenti() {
     return (
       <div>
-        <span className="sentiTitle">Tweets from verified users</span>
+        <span className="sentiTitle">Tweets from Verified Users</span>
         <div className="senti">
           <div className="sentiContainer">
             <span className="positiveNum">Positive: {this.state.sentiResponse.positive}% </span>
@@ -151,7 +152,7 @@ class App extends Component {
               {this.state.sentiResponse.ptweets.map((tweet, index) => {
                 return (
                   <li className="positiveTweets" key={index}>
-                    <span>{tweet.text}</span>
+                    <Tweet data={tweet} />
                   </li>
                 );
               })}
@@ -163,7 +164,7 @@ class App extends Component {
               {this.state.sentiResponse.ntweets.map((tweet, index) => {
                 return (
                   <li className="negativeTweets" key={index}>
-                    <span>{tweet.text}</span>
+                    <Tweet data={tweet} />
                   </li>
                 );
               })}

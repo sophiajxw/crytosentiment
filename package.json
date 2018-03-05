@@ -52,6 +52,7 @@
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-draggable": "^2.1.2",
-    "react-router": "^2.5.2"
+    "react-router": "^2.5.2",
+    "react-tweet": "^1.4.1"
   }
 }

@@ -82,13 +82,35 @@ class TwitterClient(object):
 
 			# parsing tweets one by one
 			for tweet in fetched_tweets:
+
 				# empty dictionary to store required params of a tweet
 				parsed_tweet = {}
-
+                
 				# saving text of tweet
 				parsed_tweet['text'] = tweet.text
 				# saving sentiment of tweet
 				parsed_tweet['sentiment'] = self.get_tweet_sentiment(tweet.text)
+
+				parsed_tweet['id_str'] = tweet.id_str
+				
+				user = {}
+				user['name'] = tweet.user.name
+				user['screen_name'] = tweet.user.screen_name
+				user['profile_image_url'] = tweet.user.profile_image_url
+
+				parsed_tweet['user'] = user
+				# parsed_tweet['created_at'] = tweet.created_at
+				parsed_tweet['favorite_count'] = tweet.favorite_count
+				parsed_tweet['retweet_count'] = tweet.retweet_count
+
+				entities = {}
+				# entities['media'] = tweet.entities.media
+				# entities['urls'] = tweet.entities.urls
+				# entities['user_mentions'] = tweet.entities.user_mentions
+				# entities['hashtags'] = tweet.entities.hashtags
+				# entities['symbols'] = tweet.entities.symbols
+
+				parsed_tweet['entities'] = entities
 
 				# appending parsed tweet to tweets list
 				if tweet.retweet_count > 0:
