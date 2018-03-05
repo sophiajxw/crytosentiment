@@ -78,7 +78,7 @@ class TwitterClient(object):
 
 		try:
 			# call twitter api to fetch tweets
-			fetched_tweets = self.api.search(q = query, count = count, lang = "en", verified = "true")
+			fetched_tweets = self.api.search(q = query, count = count, lang = "en", verified = "true", retweeted = "false")
 
 			# parsing tweets one by one
 			for tweet in fetched_tweets:
@@ -132,7 +132,7 @@ def runTwitterClient(cryptoType):
 	api = TwitterClient()
 	# calling function to get tweets
 
-	tweets = api.get_tweets(query = cryptoType, count = 1000)
+	tweets = api.get_tweets(query = cryptoType+"%20crypto", count = 1000)
 
 	# picking positive tweets from tweets
 	ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
